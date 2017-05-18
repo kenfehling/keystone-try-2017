@@ -1,0 +1,52 @@
+{% extends "layouts/default.html" %}
+
+{% block css %}
+	<link rel="stylesheet" href="/js/lib/fancybox/jquery.fancybox.css" />
+{% endblock %}
+
+{% block js %}
+	<script src="/js/lib/fancybox/jquery.fancybox.pack.js"></script>
+	<script>
+		$(function() {
+			$('.gallery-image').fancybox({
+				prevEffect: 'none',
+				nextEffect: 'none',
+				closeBtn: false,
+				helpers: {
+					titl: {},
+					buttons: {}
+				}
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block intro %}
+	<div class="container">
+		<h1>{{gallery.name}}</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row gallery-images">
+			<div class="col-sm-8 col-md-8">
+				<div class="row">
+					{% for image in gallery.images %}
+						<div class="col-xs-4 col-sm-4 col-md-3">
+							<a href="{{ image._.image.limit(900, 600) }}"
+							   title="{{image.name}}"
+							   rel="{{image.name}}"
+							   class="gallery-image"
+						    >
+								<img src="{{ image._.image.limit(300,300) }}"
+									 class="img-thumbnail img-rounded"
+								/>
+							</a>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
