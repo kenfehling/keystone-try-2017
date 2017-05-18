@@ -13,14 +13,13 @@ var Gallery = new keystone.List('Gallery', {
 
 const Image = new keystone.List('Image', {
 	map: { name: 'name' },
-    autokey: { path: 'slug', from: 'name', unique: true },
-    drilldown: 'image'
+	autokey: { path: 'slug', from: 'name', unique: true },
 });
 
 Image.add({
 	name: { type: String, required: true },
-    image: { type: Types.CloudinaryImage, autoCleanup: true, required: true, initial: false },
-    description: { type: Types.Textarea, height: 150 }
+	image: { type: Types.CloudinaryImage, autoCleanup: true, required: true, initial: false },
+	description: { type: Types.Textarea, height: 150 },
 });
 
 Image.relationship({ ref: 'Gallery', path: 'heroImage' });

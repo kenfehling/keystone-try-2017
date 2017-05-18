@@ -49,31 +49,17 @@
 						<a class="nav-link" href="{{ link.href }}">{{ link.label }}</a>
 					</li>
 				{% endfor %}
-
-				{% if user %}
-					{% if user.canAccessKeystone %}
-					<li class="nav-item"><a class="nav-link" href="/keystone">Open Keystone</a></li>
-					{% endif %}
-					<li class="nav-item"><a class="nav-link" href="/keystone/signout">Sign Out</a></li>
-				{% else %}
-					<li class="nav-item"><a class="nav-link" href="/keystone/signin">Sign In</a></li>
-				{% endif %}
 	        </ul>
-	        <form class="form-inline my-2 my-lg-0">
-	          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-	          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-	        </form>
+	        <div class="social">
+				<a href='http://facebook.com' target='blank'>
+					<img src='/images/social/Facebook.svg'>
+				</a>
+				<a href='http://instagram.com' target='blank'>
+					<img src='/images/social/Instagram.svg'>
+				</a>
+			</div>
 	      </div>
 	    </nav>
-
-	    <!-- Main jumbotron for a primary marketing message or call to action -->
-	    <div class="jumbotron">
-	      <div class="container">
-	        <h1 class="display-3">Hello, world!</h1>
-	        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-	        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-	      </div>
-	    </div>
 
 		{# BODY #}
 		<div id="body">
@@ -95,8 +81,19 @@
 
 		{# FOOTER #}
 		<div id="footer" class="container">
-			{# You don"t _have_ to include a link saying your site is powered by KeystoneJS, but we appreciate it! #}
-			<p>Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.</p>
+			<p>
+				<div class="section">&copy; Company 2017</div>
+				<div class="section">Created by <a href='http://kenfehling.com' target="_blank">Ken Fehling</a></div>
+				<div class="section">Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a></div>
+				{% if user %}
+					{% if user.canAccessKeystone %}
+					<div class="section"><a href="/keystone">Administrator</a></div>
+					{% endif %}
+					<div class="section"><a href="/keystone/signout">Sign Out</a></div>
+					{% else %}
+					<div class="section"><a href="/keystone/signin">Sign In</a></div>
+				{% endif %}
+			</p>
 		</div>
 
 
