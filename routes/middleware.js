@@ -7,7 +7,9 @@
  * you have more middleware you may want to group it as separate
  * modules in your project's /lib directory.
  */
-var _ = require('lodash');
+const _ = require('lodash');
+const keystone = require('keystone');
+const CustomText = keystone.list('CustomText');
 
 
 /**
@@ -21,10 +23,14 @@ exports.initLocals = function (req, res, next) {
 	res.locals.navLinks = [
 		{ label: 'Home', key: 'home', href: '/' },
 		{ label: 'Gallery', key: 'gallery', href: '/gallery' },
+		{ label: 'Directions', key: 'directions', href: '/directions' },
 		{ label: 'Contact', key: 'contact', href: '/contact' },
 	];
 	res.locals.user = req.user;
-	next();
+	CustomText.model.findOne((err, text) => {
+		res.locals.text = text;
+		next();
+	});
 };
 
 
@@ -32,7 +38,7 @@ exports.initLocals = function (req, res, next) {
 	Fetches and clears the flashMessages before a view is rendered
 */
 exports.flashMessages = function (req, res, next) {
-	var flashMessages = {
+	const flashMessages = {
 		info: req.flash('info'),
 		success: req.flash('success'),
 		warning: req.flash('warning'),

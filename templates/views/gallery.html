@@ -2,6 +2,7 @@
 
 {% block css %}
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.css" />
+	<link rel="stylesheet" href="/styles/gallery.css" />
 {% endblock %}
 
 {% block js %}
@@ -35,7 +36,7 @@
 					{% for image in gallery.images %}
 						<div class="col-xs-4 col-sm-4 col-md-3">
 							<a href="{{ image._.image.limit(800, 480) }}"
-							   title="{{image.name}}"
+							   title="{{image.description}}"
 							   rel="{{image.name}}"
 							   class="gallery-image"
 						    >
@@ -43,6 +44,7 @@
 									 class="img-thumbnail img-rounded"
 								/>
 							</a>
+							<div class="image-caption">{{image.name}}</div>
 						</div>
 					{% endfor %}
 				</div>

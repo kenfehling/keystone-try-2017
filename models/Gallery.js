@@ -6,9 +6,9 @@ var Types = keystone.Field.Types;
  * =============
  */
 
-var Gallery = new keystone.List('Gallery', {
+const Gallery = new keystone.List('Gallery', {
 	autokey: { from: 'name', path: 'key', unique: true },
-	drilldown: 'heroImage, images'
+	drilldown: 'heroImage, images',
 });
 
 const Image = new keystone.List('Image', {
