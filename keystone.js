@@ -14,8 +14,6 @@ var nunjucks = require('nunjucks');
 keystone.init({
 	'name': 'KeystoneTry',
 	'brand': 'KeystoneTry',
-
-	'sass': 'public',
 	'static': 'public',
 	'favicon': 'public/favicon.ico',
 	'views': 'templates/views',
@@ -53,6 +51,7 @@ keystone.set('nav', {
 	galleries: 'galleries',
 	enquiries: 'enquiries',
 	users: 'users',
+	customTexts: 'custom-texts',
 });
 
 // Start Keystone to connect to your database and initialise the web server
