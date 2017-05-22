@@ -1,3 +1,8 @@
 .row.map {
   padding-top: 20px;
+  
+  iframe {
+	max-width: 640px;
+	width: 100%;
+  }
 }

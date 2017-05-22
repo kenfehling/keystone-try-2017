@@ -10,10 +10,7 @@
 		<title>{{ title|default("KeystoneTry") }}</title>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-
 		{# Customise the stylesheet for your site by editing /public/styles/site.sass #}
-		<link href="/styles/themes/Colors.css" rel="stylesheet">
 		<link href="/css/site.css" rel="stylesheet">
 
 		{# This file provides the default styling for the KeystoneJS Content Editor #}
@@ -37,72 +34,96 @@
 	<body>
 
 		{# HEADER #}
-	    <nav class="navbar navbar-toggleable-md fixed-top">
-	      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="navbar-toggler-icon"></span>
-	      </button>
-	      <a class="navbar-brand" href="/">Navbar</a>
 
-	      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-	        <ul class="navbar-nav mr-auto">
-				{% for link in navLinks %}
-					<li class="nav-item {{ 'active' if link.key == section else '' }}">
-						<a class="nav-link" href="{{ link.href }}">{{ link.label }}</a>
+		<div class="off-canvas position-left" id="offCanvas" data-off-canvas>
+			<aside>
+				<ul class="menu vertical" data-dropdown-menu>
+					{% for link in navLinks %}
+					<li class="{{ 'active' if link.key == section else '' }}">
+						<a href="{{ link.href }}">{{ link.label }}</a>
 					</li>
-				{% endfor %}
-	        </ul>
-	        <div class="social">
-				<a href='http://facebook.com' target='blank'>
-					<img src='/images/social/Facebook.svg'>
-				</a>
-				<a href='http://instagram.com' target='blank'>
-					<img src='/images/social/Instagram.svg'>
-				</a>
+					{% endfor %}
+				</ul>
+			</aside>
+		</div>
+		<div class="off-canvas-content" data-off-canvas-content>
+			<img id="header-img" src='/images/header.jpg' />
+
+			<div data-sticky-container>
+				<nav class="top-bar" data-sticky data-options="marginTop:0;" style="width:100%"
+					 data-sticky-on="small" data-top-anchor="header-img:bottom">
+					<div class="top-bar-left">
+						<button type="button" class="menu-icon hide-for-medium hide-for-large" style="color:black" data-toggle="offCanvas"></button>
+						
+						<ul class="dropdown menu show-for-medium" data-dropdown-menu>
+							{% for link in navLinks %}
+							<li class="{{ 'active' if link.key == section else '' }}">
+								<a href="{{ link.href }}">{{ link.label }}</a>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class="top-bar-right social">
+						<ul class="menu" data-dropdown-menu>
+							<li>
+								<a href='http://facebook.com' target='blank'>
+									<img src='/images/social/Facebook.svg'>
+								</a>
+							</li>
+							<li>
+								<a href='http://instagram.com' target='blank'>
+									<img src='/images/social/Instagram.svg'>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
 			</div>
-	      </div>
-	    </nav>
 
-		{# BODY #}
-		<div id="body">
-			{# NOTE:
-			   There is no .container wrapping class around body blocks to allow more flexibility in design.
-			   Remember to include it in your templates when you override the intro and content blocks! #}
+			{# BODY #}
+			<div id="body">
+				{# NOTE:
+				There is no .container wrapping class around body blocks to allow more flexibility in design.
+				Remember to include it in your templates when you override the intro and content blocks! #}
 
-			{# The Intro block appears above flash messages (used for temporary information display) #}
-			{% block intro %}{% endblock %}
+				{# The Intro block appears above flash messages (used for temporary information display) #}
+				{% block intro %}{% endblock %}
 
-			{# Flash messages allow you to display once-off status messages to users, e.g. form
-			   validation errors, success messages, etc. #}
-			{{ FM.flashMessages(messages) }}
+				{# Flash messages allow you to display once-off status messages to users, e.g. form
+				validation errors, success messages, etc. #}
+				{{ FM.flashMessages(messages) }}
 
-			{# The content block should contain the body of your template"s content #}
-			{% block content %}{% endblock %}
-		</div>
+				{# The content block should contain the body of your template"s content #}
+				{% block content %}{% endblock %}
+			</div>
 
 
-		{# FOOTER #}
-		<div id="footer" class="container">
-			<p>
-				<div class="section">&copy; {{text.company}} 2017</div>
-				<div class="section">Created by <a href='http://kenfehling.com' target="_blank">Ken Fehling</a></div>
-				<div class="section">Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a></div>
+			{# FOOTER #}
+			<div id="footer" class="row">
+
+				<div class="small-6 medium-4 large-3 columns">&copy; {{text.company}} 2017</div>
+				<div class="small-6 medium-4 large-3 columns">Created by <a href='http://kenfehling.com' target="_blank">Ken Fehling</a></div>
+				<div class="small-6 medium-4 large-3 columns">Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a></div>
 				{% if user %}
-					{% if user.canAccessKeystone %}
-					<div class="section"><a href="/keystone">Administrator</a></div>
-					{% endif %}
-					<div class="section"><a href="/keystone/signout">Sign Out</a></div>
-					{% else %}
-					<div class="section"><a href="/keystone/signin">Sign In</a></div>
+				{% if user.canAccessKeystone %}
+				<div class="small-6 medium-4 large-3 columns"><a href="/keystone">Administrator</a></div>
 				{% endif %}
-			</p>
-		</div>
+				<div class="small-6 medium-4 large-3 columns"><a href="/keystone/signout">Sign Out</a></div>
+				{% else %}
+				<div class="small-6 medium-4 large-3 columns"><a href="/keystone/signin">Sign In</a></div>
+				{% endif %}
 
+			</div>
+		</div>
 
 		{# JAVASCRIPT #}
 
 	<script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js"></script>
+
+	<script>
+		$(document).foundation();
+	</script>
 
 		{# The KeystoneJS Content Editor provides support for ks-editable data attributes,
 			which generate links to edit content for users who can access Keystone #}

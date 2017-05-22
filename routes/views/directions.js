@@ -7,9 +7,7 @@ exports = module.exports = (req, res) => {
 
 	// Set locals
 	locals.section = 'directions';
-
-	console.log(res.locals);
-
+	
 	// Render the view
 	view.render('directions');
 

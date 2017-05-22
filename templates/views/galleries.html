@@ -1,13 +1,13 @@
 {% extends "layouts/default.html" %}
 
 {% block intro %}
-	<div class="container">
+	<div class="row column">
 		<h1>Gallery</h1>
 	</div>
 {% endblock %}
 
 {% block content %}
-	<div class="container">
+	<div class="row column">
 		{% if galleries.length %}
 			{% for gallery in galleries %}
 				<h2>{{ gallery.name }}
