@@ -9,6 +9,6 @@ exports = module.exports = (req, res) => {
 	locals.section = 'directions';
 
 	// Render the view
-	view.render('directions');
+	view.render('edit-directions');
 
 };

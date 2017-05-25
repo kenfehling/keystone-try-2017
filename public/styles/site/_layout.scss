@@ -1,7 +1,17 @@
-@import "../site/variables";
+@import "../site/settings";
 
 $social-icon-size-small: 30px;
 $social-icon-size-large: 34px;
+
+@include breakpoint(medium up) {
+  body {
+	max-width: 1024px;
+	margin: -1px auto 0 auto;
+	box-shadow: 0 0 10px 4px #E4E4E4;
+	border: thin solid #D7D7D7;
+	padding: 16px 16px 0 16px;
+  }
+}
 
 nav {
   color: $topbar-font-color;
@@ -14,7 +24,7 @@ nav {
 	}
   }
   .social {
-	@media (max-width: 639px) {
+	@include breakpoint(small) {
 	  a {
 		padding: 0 0 0 0.4rem;
 		img {
@@ -23,7 +33,7 @@ nav {
 		}
 	  }
 	}
-  	@media (min-width: 640px) {
+	@include breakpoint(medium up) {
 	  a {
 		padding: 1px 0.4rem 0 0.4em;
 		img {
@@ -35,11 +45,22 @@ nav {
   }
 }
 
+h2 {
+  margin-top: 16px;
+  margin-right: 16px;
+  display: inline-block;
+}
+
+.edit-link {
+  display: inline-block;
+  line-height: 48px;
+}
+
 #footer {
+  font-size: 0.9em;
   margin-top: 30px;
-  margin-bottom: 20px;
   border-top: 1px solid #eeeeee;
-  padding-top: 30px;
+  padding: 16px 0;
   color: #777777;
   text-align: center;
 }

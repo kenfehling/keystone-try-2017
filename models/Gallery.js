@@ -1,10 +1,5 @@
-var keystone = require('keystone');
-var Types = keystone.Field.Types;
-
-/**
- * Gallery Model
- * =============
- */
+const keystone = require('keystone');
+const Types = keystone.Field.Types;
 
 const Gallery = new keystone.List('Gallery', {
 	autokey: { from: 'name', path: 'key', unique: true },
@@ -33,7 +28,7 @@ Gallery.add({
 	name: { type: String, required: true },
 	publishedDate: { type: Date, default: Date.now },
 	heroImage: { type: Types.Relationship, ref: 'Image' },
-	images: { type: Types.Relationship, ref: 'Image', many: true }
+	images: { type: Types.Relationship, ref: 'Image', many: true },
 });
 
 Gallery.defaultColumns = 'title, published|20%, publishedDate|20%';

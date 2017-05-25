@@ -1,21 +1,23 @@
 {% extends "layouts/default.html" %}
 
 {% block css %}
-	<link rel="stylesheet" href="/css/directions.css" />
+<link rel="stylesheet" href="/css/directions.css" />
 {% endblock %}
 
 {% block intro %}
 <div class="row column">
 	<h2>Directions</h2>
-	<a class="edit-link" href='directions/edit'>Edit</a>
 </div>
 {% endblock %}
 
 {% block content %}
+<form method='post'>
 	<div class="row column">
-		{{ text.directions }}
+		<textarea name='directions'>{{ text.directions }}</textarea>
+		<input type='submit' value='Save' />
 	</div>
 	<div class='row column map'>
 		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48272.199506548306!2d-73.08090045484501!3d40.871600558792174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e846e0f3260d29%3A0x7d767bdf568e71e6!2sSelden%2C+NY!5e0!3m2!1sen!2sus!4v1495120845245" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 	</div>
+</form>
 {% endblock %}

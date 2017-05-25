@@ -18,27 +18,33 @@
  * http://expressjs.com/api.html#app.VERB
  */
 
-var keystone = require('keystone');
-var middleware = require('./middleware');
-var importRoutes = keystone.importer(__dirname);
+const keystone = require('keystone');
+const middleware = require('./middleware');
+const importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
 keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers
-var routes = {
+const routes = {
 	views: importRoutes('./views'),
+	edit: importRoutes('./edit'),
+	post: importRoutes('./post'),
 };
 
 // Setup Route Bindings
 exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
+	app.get('/menu', routes.views.menu);
 	app.get('/gallery', routes.views.galleries);
 	app.get('/gallery/:key', routes.views.gallery);
+	app.get('/coupons', routes.views.coupons);
 	app.get('/directions', routes.views.directions);
-	app.all('/contact', routes.views.contact);
+	app.get('/directions/edit', routes.edit.directions);
+	app.get('/contact', routes.views.contact);
+	app.post('/*/edit', middleware.requireAdmin, routes.post.text);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
